@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<commands>
+    <!--
+        op				命令操作名称
+        sql				sql语句
+        param_pattern 	一定要和 sql语句中的列数对应上
+        param_count 	表示param_pattern中问号的个数
+        batch_count 	表示服务器在缓冲多少条以后集中向数据库发送一次请求
+     -->
+
+    <command>
+        <op>install</op>
+        <sql>insert into bi_install ( appid, deviceid, createtime, updatetime, date, time, idfa, idfv, channelid , clientV) values </sql>
+        <param_pattern>(?,?,?,?,?,?,?,?,?,?)</param_pattern>
+        <param_count>10</param_count>
+        <batch_count>1</batch_count>
+    </command>
+
+    <command>
+        <op>startup</op>
+        <sql>insert into bi_startup ( appid, deviceid, createtime, updatetime, date, time, idfa, idfv, channelid, ip, network, devicetype, os, op, resolution, tz, clientV, extra ) values </sql>
+        <param_pattern>(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)</param_pattern>
+        <param_count>18</param_count>
+        <batch_count>1</batch_count>
+    </command>
+
+    <command>
+        <op>register</op>
+        <sql>insert into bi_register ( appid, who, deviceid, createtime, updatetime, idfa, idfv, accounttype, gender, age, serverid, channelid , clientV) values </sql>
+        <param_pattern>(?,?,?,?,?,?,?,?,?,?,?,?,?)</param_pattern>
+        <param_count>13</param_count>
+        <batch_count>1</batch_count>
+    </command>
+
+    <command>
+        <op>login</op>
+        <sql>insert into bi_login ( appid, who, deviceid, createtime, updatetime, date, time, idfa, idfv, serverid, channelid, level, clientV) values </sql>
+        <param_pattern>(?,?,?,?,?,?,?,?,?,?,?,?,?)</param_pattern>
+        <param_count>13</param_count>
+        <batch_count>1</batch_count>
+    </command>
+
+    <command>
+        <op>payment</op>
+        <sql>insert into bi_payment ( appid, who, deviceid, createtime, updatetime, transactionid, paymenttype, currencytype, currencyamount, virtualcoinamount, iapname, iapamount, serverid, channelid, idfa, idfv, level, clientV) values </sql>
+        <param_pattern>(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)</param_pattern>
+        <param_count>18</param_count>
+        <batch_count>1</batch_count>
+    </command>
+
+    <command>
+        <op>quest</op>
+        <sql>insert into bi_quest ( appid, who, deviceid, createtime, updatetime, questid, queststatus, questtype, serverid, channelid, level, clientV) values </sql>
+        <param_pattern>(?,?,?,?,?,?,?,?,?,?,?,?)</param_pattern>
+        <param_count>12</param_count>
+        <batch_count>1</batch_count>
+    </command>
+
+    <command>
+        <op>economy</op>
+        <sql>insert into bi_economy ( appid, who, deviceid, createtime, updatetime, itemname, itemamount, itemtotalprice, serverid, channelid, level, clientV) values </sql>
+        <param_pattern>(?,?,?,?,?,?,?,?,?,?,?,?)</param_pattern>
+        <param_count>12</param_count>
+        <batch_count>1</batch_count>
+    </command>
+
+    <command>
+        <op>event</op>
+        <sql>insert into bi_event ( appid, who, what, deviceid, createtime, updatetime, serverid, channelid, define1, define2, clientV ) values </sql>
+        <param_pattern>(?,?,?,?,?,?,?,?,?,?,?)</param_pattern>
+        <param_count>11</param_count>
+        <batch_count>1</batch_count>
+    </command>
+
+    <command>
+        <op>heartbeat</op>
+        <sql>insert into bi_heartbeat ( appid, who, deviceid, createtime, updatetime, serverid, channelid, level ) values </sql>
+        <param_pattern>(?,?,?,?,?,?,?,?)</param_pattern>
+        <param_count>8</param_count>
+        <batch_count>1</batch_count>
+    </command>
+
+    <command>
+        <op>user</op>
+        <sql>insert into bi_user (  appID, deviceid, userID, userOpenID, userName, userGold, userDiamond, userSex, userLevel, userExp, userIsRecharged, userVIPExp, createTime, updateTime, clientV ) values </sql>
+        <param_pattern>(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)</param_pattern>
+        <param_count>15</param_count>
+        <batch_count>1</batch_count>
+    </command>
+
+
+</commands>
