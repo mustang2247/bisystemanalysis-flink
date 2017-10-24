@@ -21,7 +21,7 @@ import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import org.apache.flink.streaming.examples.wordcount.WordCount;
+import org.apache.flink.streaming.examples.wordcount.Tokenizer;
 import org.apache.flink.streaming.examples.wordcount.util.WordCountData;
 
 /**
@@ -73,7 +73,7 @@ public class WindowWordCount {
 
 		DataStream<Tuple2<String, Integer>> counts =
 		// split up the lines in pairs (2-tuples) containing: (word,1)
-		text.flatMap(new WordCount.Tokenizer())
+		text.flatMap(new Tokenizer())
 				// create windows of windowSize records slided every slideSize records
 				.keyBy(0)
 				.countWindow(windowSize, slideSize)
