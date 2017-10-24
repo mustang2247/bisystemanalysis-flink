@@ -24,6 +24,7 @@ import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.core.fs.FileSystem.WriteMode;
+import org.apache.flink.examples.java.wordcount.util.Word;
 import org.apache.flink.examples.java.wordcount.util.WordCountData;
 import org.apache.flink.util.Collector;
 
@@ -33,48 +34,6 @@ import org.apache.flink.util.Collector;
  */
 @SuppressWarnings("serial")
 public class WordCountPojo {
-
-	/**
-	 * This is the POJO (Plain Old Java Object) that is being used
-	 * for all the operations.
-	 * As long as all fields are public or have a getter/setter, the system can handle them
-	 */
-	public static class Word {
-
-		// fields
-		private String word;
-		private int frequency;
-
-		// constructors
-		public Word() {}
-
-		public Word(String word, int i) {
-			this.word = word;
-			this.frequency = i;
-		}
-
-		// getters setters
-		public String getWord() {
-			return word;
-		}
-
-		public void setWord(String word) {
-			this.word = word;
-		}
-
-		public int getFrequency() {
-			return frequency;
-		}
-
-		public void setFrequency(int frequency) {
-			this.frequency = frequency;
-		}
-
-		@Override
-		public String toString() {
-			return "Word=" + word + " freq=" + frequency;
-		}
-	}
 
 	public static void main(String[] args) throws Exception {
 
@@ -106,7 +65,7 @@ public class WordCountPojo {
 			.reduce(new ReduceFunction<Word>() {
 				@Override
 				public Word reduce(Word value1, Word value2) throws Exception {
-					return new Word(value1.word, value1.frequency + value2.frequency);
+					return new Word(value1.getWord(), value1.getFrequency() + value2.getFrequency());
 				}
 			});
 
