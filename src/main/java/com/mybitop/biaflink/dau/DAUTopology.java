@@ -48,7 +48,8 @@ public class DAUTopology {
         DataStream<Tuple2<String, Integer>> counts =
                 // split up the lines in pairs (2-tuples) containing: (word,1)
                 // 拆分一行
-                text.flatMap(new FunFMDataParse());
+                text.flatMap(new FunFMDataParse())
+                .flatMap(new FunFMPlatform());
 
         // emit result
         // 发射结果
