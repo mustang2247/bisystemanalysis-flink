@@ -1,5 +1,6 @@
 package com.mybitop.biaflink.dau;
 
+import com.mybitop.biaflink.entity.Startup;
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.util.Collector;
@@ -14,14 +15,19 @@ public class FunFMDataParse implements FlatMapFunction<String, Tuple2<String, In
     private static final Logger logger = LoggerFactory.getLogger( FunFMDataParse.class );
     private static final long serialVersionUID = 1L;
 
+    private int sum = 0;
+
     @Override
     public void flatMap(String value, Collector<Tuple2<String, Integer>> out)
             throws Exception {
         // normalize and split the line
         // 正常化并拆分该行
-//        String[] tokens = value.toLowerCase().split("\\W+");
-        out.collect(new Tuple2<String, Integer>(value, 1));
-        logger.info("  world: " + value + "  value:  " + 1);
+        String[] tokens = value.split("\t");
+        if(tokens.length < 19) return;
+        Startup startup = new Startup(tokens);
+        sum ++ ;
+        out.collect(new Tuple2<String, Integer>(startup.getDeviceid(), sum));
+        logger.info("  world: " + startup.getChannelid() + "  value:  " + sum);
         // emit the pairs
         // 发出对
 //        for (String token : tokens) {

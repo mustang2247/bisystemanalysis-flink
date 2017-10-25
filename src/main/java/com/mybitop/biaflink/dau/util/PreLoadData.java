@@ -69,7 +69,7 @@ public class PreLoadData {
                 line = br.readLine(); // 一次读入一行数据
                 if(line != null && !line.isEmpty()){
                     lines.add(line);
-                    System.out.println(line);
+//                    System.out.println(line);
                 }
             }
             WORDS = (String[]) lines.toArray(new String[lines.size()]);
