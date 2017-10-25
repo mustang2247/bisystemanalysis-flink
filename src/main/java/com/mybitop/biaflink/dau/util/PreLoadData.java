@@ -74,6 +74,8 @@ public class PreLoadData {
             }
             WORDS = (String[]) lines.toArray(new String[lines.size()]);
 
+            br.close();
+            reader.close();
 //            System.out.println(lines);
 
 
