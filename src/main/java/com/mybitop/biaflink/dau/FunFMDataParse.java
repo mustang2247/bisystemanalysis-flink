@@ -23,18 +23,15 @@ public class FunFMDataParse implements FlatMapFunction<String, Tuple2<String, In
         // normalize and split the line
         // 正常化并拆分该行
         String[] tokens = value.split("\t");
-        if(tokens.length < 19) return;
-        Startup startup = new Startup(tokens);
+        Startup startup;
+        try {
+            startup = new Startup(tokens);
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return;
+        }
         sum ++ ;
         out.collect(new Tuple2<String, Integer>(startup.getDeviceid(), sum));
         logger.info("  world: " + startup.getChannelid() + "  value:  " + sum);
-        // emit the pairs
-        // 发出对
-//        for (String token : tokens) {
-//            if (token.length() > 0) {
-//                out.collect(new Tuple2<String, Integer>(token, 1));
-//                logger.info("  world: " + token + "  value:  " + 1);
-//            }
-//        }
     }
 }
