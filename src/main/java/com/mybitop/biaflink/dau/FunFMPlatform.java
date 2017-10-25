@@ -15,6 +15,6 @@ public class FunFMPlatform implements FlatMapFunction<Tuple2<String, Integer>, T
     @Override
     public void flatMap(Tuple2<String, Integer> stringIntegerTuple2, Collector<Tuple2<String, Integer>> collector) throws Exception {
         collector.collect(new Tuple2<String, Integer>(stringIntegerTuple2.getField(0), stringIntegerTuple2.getField(1)));
-        logger.info("  world: " + stringIntegerTuple2.getField(0) + "  value:  " + stringIntegerTuple2.getField(1));
+//        logger.info("  world: " + stringIntegerTuple2.getField(0) + "  value:  " + stringIntegerTuple2.getField(1));
     }
 }

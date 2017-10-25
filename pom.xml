@@ -77,20 +77,11 @@
             <version>${flink.version}</version>
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>org.apache.flink</groupId>-->
-            <!--<artifactId>flink-test-utils_2.11</artifactId>-->
-            <!--<version>${flink.version}</version>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
-
-        <!--<dependency>-->
-            <!--<groupId>org.apache.flink</groupId>-->
-            <!--<artifactId>flink-streaming-java_2.11</artifactId>-->
-            <!--<version>${flink.version}</version>-->
-            <!--<scope>test</scope>-->
-            <!--<type>test-jar</type>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.apache.bahir</groupId>
+            <artifactId>flink-connector-redis_2.11</artifactId>
+            <version>1.0</version>
+        </dependency>
 
         <!--========================-->
 

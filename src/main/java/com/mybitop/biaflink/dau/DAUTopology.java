@@ -5,8 +5,11 @@ import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.streaming.connectors.redis.common.config.FlinkJedisPoolConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.net.URL;
 
 public class DAUTopology {
 
@@ -42,7 +45,14 @@ public class DAUTopology {
             // get default test text data
             // 获取默认测试文本数据
             PreLoadData.loader();
-            text = env.fromElements(PreLoadData.WORDS);
+//            text = env.fromElements(PreLoadData.WORDS);
+            URL url = null;
+            try {
+                url = Thread.currentThread().getContextClassLoader().getResource("bi_startup.txt");
+            }  catch (Exception e){
+                logger.error(e.getMessage());
+            }
+            text = env.readTextFile(url.getPath());
         }
 
         DataStream<Tuple2<String, Integer>> counts =
@@ -51,13 +61,20 @@ public class DAUTopology {
                 text.flatMap(new FunFMDataParse())
                 .flatMap(new FunFMPlatform());
 
+        FlinkJedisPoolConfig conf = new FlinkJedisPoolConfig.Builder().setHost("127.0.0.1").build();
+
+//        counts.addSink(new RedisSink<Tuple2<String, Integer>>(conf, new RedisExampleMapper()));
+        counts.addSink(new SinkDataPersistenceUV());
+
         // emit result
         // 发射结果
         if (params.has("output")) {
             counts.writeAsText(params.get("output"));
+//            counts.writeUsingOutputFormat(new FunFMDataPersistenceUV());
         } else {
             System.out.println("Printing result to stdout. Use --output to specify output path.");
             counts.print();
+//            counts.writeUsingOutputFormat(new FunFMDataPersistenceUV());
         }
 
         // execute program

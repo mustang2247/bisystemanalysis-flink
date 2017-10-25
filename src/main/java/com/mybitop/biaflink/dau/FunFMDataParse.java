@@ -32,6 +32,6 @@ public class FunFMDataParse implements FlatMapFunction<String, Tuple2<String, In
         }
         sum ++ ;
         out.collect(new Tuple2<String, Integer>(startup.getDeviceid(), sum));
-        logger.info("  world: " + startup.getChannelid() + "  value:  " + sum);
+//        logger.info("  world: " + startup.getChannelid() + "  value:  " + sum);
     }
 }
