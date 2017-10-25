@@ -27,7 +27,7 @@ public class FunFMDataParse implements FlatMapFunction<String, Tuple2<String, In
         try {
             startup = new Startup(tokens);
         }catch (Exception e){
-            logger.error(e.getMessage());
+            logger.error("########   " + e.getMessage());
             return;
         }
         sum ++ ;

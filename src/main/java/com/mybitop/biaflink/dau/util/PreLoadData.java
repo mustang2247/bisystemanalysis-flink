@@ -35,7 +35,7 @@ public class PreLoadData {
         try { // 防止文件建立或读取失败，用catch捕捉错误并打印，也可以throw
 
 			/* 读入TXT文件 */
-            String fileName = "test.txt"; // 绝对路径或相对路径都可以，这里是绝对路径，写入文件时演示相对路径
+            String fileName = "bi_startup.txt"; // 绝对路径或相对路径都可以，这里是绝对路径，写入文件时演示相对路径
             InputStream is = null;
             URL url = null;
             try {
