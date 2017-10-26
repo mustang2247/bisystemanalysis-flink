@@ -58,8 +58,9 @@ public class DAUTopology {
         DataStream<Tuple2<String, Integer>> counts =
                 // split up the lines in pairs (2-tuples) containing: (word,1)
                 // 拆分一行
-                text.flatMap(new FunFMDataParse())
-                .flatMap(new FunFMPlatform());
+                text.flatMap(new FunFMDataParse());
+
+        counts.flatMap(new FunFMPlatform());
 
         FlinkJedisPoolConfig conf = new FlinkJedisPoolConfig.Builder().setHost("127.0.0.1").build();
 
