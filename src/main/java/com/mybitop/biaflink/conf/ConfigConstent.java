@@ -1,5 +1,9 @@
 package com.mybitop.biaflink.conf;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * 配置文件
  */
@@ -16,5 +20,81 @@ public class ConfigConstent {
 
     //================date================
     public static final String LOG_CHANNEL = "log";
+
+    public static Map<String, String> getFlinkConfs(Map conf) {
+        String kafkaBrokers = getKafkaBrokers(conf);
+        String zookeeperServers = getZookeeperServers(conf);
+
+        Map<String, String> flinkConfs = new HashMap<String, String>();
+        flinkConfs.put("topic", getKafkaTopic(conf));
+        flinkConfs.put("bootstrap.servers", kafkaBrokers);
+        flinkConfs.put("zookeeper.connect", zookeeperServers);
+        flinkConfs.put("jedis_server", getRedisHost(conf));
+        flinkConfs.put("group.id", "myGroup");
+
+        return flinkConfs;
+    }
+
+    /**
+     * 获取zookeeper配置文件
+     * @param conf
+     * @return
+     */
+    private static String getZookeeperServers(Map conf) {
+        if(!conf.containsKey("zookeeper.servers")) {
+            throw new IllegalArgumentException("Not zookeeper servers found!");
+        }
+        return listOfStringToString((List<String>) conf.get("zookeeper.servers"), String.valueOf(conf.get("zookeeper.port")));
+    }
+
+    /**
+     * 获取kafka配置文件
+     * @param conf
+     * @return
+     */
+    private static String getKafkaBrokers(Map conf) {
+        if(!conf.containsKey("kafka.brokers")) {
+            throw new IllegalArgumentException("No kafka brokers found!");
+        }
+        if(!conf.containsKey("kafka.port")) {
+            throw new IllegalArgumentException("No kafka port found!");
+        }
+        return listOfStringToString((List<String>) conf.get("kafka.brokers"), String.valueOf(conf.get("kafka.port")));
+    }
+
+    /**
+     * 获取kafka topic
+     * @param conf
+     * @return
+     */
+    private static String getKafkaTopic(Map conf) {
+        if(!conf.containsKey("kafka.topic")) {
+            throw new IllegalArgumentException("No kafka topic found!");
+        }
+        return (String)conf.get("kafka.topic");
+    }
+
+    /**
+     * 获取redis host
+     * @param conf
+     * @return
+     */
+    private static String getRedisHost(Map conf) {
+        if(!conf.containsKey("redis.host")) {
+            throw new IllegalArgumentException("No redis host found!");
+        }
+        return (String)conf.get("redis.host");
+    }
+
+    public static String listOfStringToString(List<String> list, String port) {
+        String val = "";
+        for(int i=0; i<list.size(); i++) {
+            val += list.get(i) + ":" + port;
+            if(i < list.size()-1) {
+                val += ",";
+            }
+        }
+        return val;
+    }
 
 }

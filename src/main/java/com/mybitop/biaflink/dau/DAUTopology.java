@@ -1,6 +1,8 @@
 package com.mybitop.biaflink.dau;
 
 import com.mybitop.biaflink.dau.util.PreLoadData;
+import com.mybitop.biaflink.utils.PropUtil;
+import com.mybitop.biaflink.utils.Utils;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.streaming.api.datastream.DataStream;
@@ -10,6 +12,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.URL;
+import java.util.Map;
+
+import static com.mybitop.biaflink.conf.ConfigConstent.getFlinkConfs;
 
 public class DAUTopology {
 
@@ -21,9 +26,18 @@ public class DAUTopology {
         // 检查输入参数
         final ParameterTool params = ParameterTool.fromArgs(args);
 
+        //===============================init config=============================================
+        String envDir = PropUtil.getProp("/env.properties", "envdir");
+        Map conf = Utils.findAndReadConfigFile(envDir + "/mainconf.yaml", true);
+        int kafkaPartitions = ((Number)conf.get("kafka.partitions")).intValue();
+
+        ParameterTool flinkBenchmarkParams = ParameterTool.fromMap(getFlinkConfs(conf));
+
         // set up the execution environment
         // 建立执行环境
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+
+        //============================================================================
 
         // make parameters available in the web interface
         // 使参数在Web接口中可用
@@ -62,7 +76,7 @@ public class DAUTopology {
 
         counts.flatMap(new FunFMPlatform());
 
-        FlinkJedisPoolConfig conf = new FlinkJedisPoolConfig.Builder().setHost("127.0.0.1").build();
+//        FlinkJedisPoolConfig conf = new FlinkJedisPoolConfig.Builder().setHost("127.0.0.1").build();
 
 //        counts.addSink(new RedisSink<Tuple2<String, Integer>>(conf, new RedisExampleMapper()));
         counts.addSink(new SinkDataPersistenceUV());

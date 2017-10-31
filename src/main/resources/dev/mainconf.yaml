@@ -1,0 +1,13 @@
+
+zookeeper.servers: "localhost"
+zookeeper.port: 2181
+
+kafka.brokers: "localhost"
+kafka.port: 9092
+kafka.topic: "ad-events"
+kafka.partitions: 1
+
+redis.host: "localhost"
+redis.port: 6379
+redis.password:
+
