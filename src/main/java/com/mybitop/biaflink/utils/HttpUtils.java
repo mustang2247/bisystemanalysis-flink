@@ -63,6 +63,14 @@ public class HttpUtils {
             HttpURLConnection httpURLConnection = (HttpURLConnection) realUrl
                     .openConnection();
             httpURLConnection.setRequestMethod("GET");
+
+            // 设置连接主机超时时间
+            httpURLConnection.setConnectTimeout(5 * 1000);
+            //设置从主机读取数据超时
+            httpURLConnection.setReadTimeout(5 * 1000);
+            // 设置是否使用缓存  默认是true
+            httpURLConnection.setUseCaches(true);
+
             // 设置通用的请求属性
             httpURLConnection.setRequestProperty("accept", "*/*");
             httpURLConnection.setRequestProperty("content-type",
