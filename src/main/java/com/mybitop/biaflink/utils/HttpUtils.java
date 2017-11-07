@@ -21,12 +21,17 @@ public class HttpUtils {
      * @param pars 参数
      * @return
      * @throws Exception
+     *
+     * 从网络获取json数据
      */
     public static String Get(String host, Map<String, String> pars)
             throws Exception {
 
-        pars.put("sign_type", "md5");
-        String query = Create_linkString(pars, CHAR_SET);
+        String query = null;
+        if(pars != null){
+            pars.put("sign_type", "md5");
+            query = Create_linkString(pars, CHAR_SET);
+        }
 
         if (host.indexOf("?") != -1)
             host += "&_charset=" + CHAR_SET;
@@ -47,11 +52,13 @@ public class HttpUtils {
      */
     private final static String getRequest(String url, String param,
                                            String _input_charset) throws Exception {
-        OutputStreamWriter outputStreamWriter = null;
         BufferedReader in = null;
         String result = "";
         try {
-            URL realUrl = new URL(url);
+            if (param != null && !param.isEmpty()){
+                url += param;
+            }
+            URL realUrl = new URL(url.trim());
             // 打开和URL之间的连接
             HttpURLConnection httpURLConnection = (HttpURLConnection) realUrl
                     .openConnection();
@@ -61,16 +68,7 @@ public class HttpUtils {
             httpURLConnection.setRequestProperty("content-type",
                     "application/x-www-form-urlencoded;charset="
                             + _input_charset);
-            // 发送POST请求必须设置如下两行
-            httpURLConnection.setDoOutput(true);//使用 URL 连接进行输出
-            httpURLConnection.setDoInput(true);//使用 URL 连接进行输入
-            // 获取URLConnection对象对应的输出流
 
-            outputStreamWriter = new OutputStreamWriter(httpURLConnection.getOutputStream(), _input_charset);
-            // 发送请求参数
-            outputStreamWriter.write(param);
-            // flush输出流的缓冲
-            outputStreamWriter.flush();
             // 定义BufferedReader输入流来读取URL的响应
             in = new BufferedReader(new InputStreamReader(
                     httpURLConnection.getInputStream(), _input_charset));
@@ -84,9 +82,6 @@ public class HttpUtils {
         // 使用finally块来关闭输出流、输入流
         finally {
             try {
-                if (outputStreamWriter != null) {
-                    outputStreamWriter.close();
-                }
                 if (in != null) {
                     in.close();
                 }
@@ -139,7 +134,7 @@ public class HttpUtils {
         BufferedReader in = null;
         String result = "";
         try {
-            URL realUrl = new URL(url);
+            URL realUrl = new URL(url.trim());
             // 打开和URL之间的连接
             HttpURLConnection conn = (HttpURLConnection) realUrl
                     .openConnection();
@@ -214,5 +209,10 @@ public class HttpUtils {
 
 
     //=============================================================
+
+    public static void main(String[] args) throws Exception {
+        String url = "http://bi.mybi.top:9009/versionSelect/getAccountById/1";
+        System.out.println(Get(url, null));
+    }
 
 }
