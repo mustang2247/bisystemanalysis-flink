@@ -32,7 +32,7 @@ public class Utils {
             }
 
             if (mustExist) {
-                if(confFileEmpty)
+                if (confFileEmpty)
                     throw new RuntimeException("Config file " + name + " doesn't have any valid storm configs");
                 else
                     throw new RuntimeException("Could not find config file on classpath " + name);
@@ -71,7 +71,7 @@ public class Utils {
                             + " resources. You're probably bundling the Storm jars with your topology jar. "
                             + resources);
         } else {
-            LOG.debug("Using "+configFilePath+" from resources");
+            LOG.debug("Using " + configFilePath + " from resources");
             URL resource = resources.iterator().next();
             return resource.openStream();
         }
@@ -82,12 +82,14 @@ public class Utils {
         try {
             Enumeration<URL> resources = Thread.currentThread().getContextClassLoader().getResources(name);
             List<URL> ret = new ArrayList<URL>();
-            while(resources.hasMoreElements()) {
+            while (resources.hasMoreElements()) {
                 ret.add(resources.nextElement());
             }
             return ret;
-        } catch(IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
+
 }
