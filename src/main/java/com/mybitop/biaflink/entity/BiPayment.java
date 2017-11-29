@@ -100,6 +100,28 @@ public class BiPayment implements Serializable {
      */
     private String clientV;
 
+    public BiPayment(Integer id, String appid, String who, String deviceid, Date createtime, Date updatetime, String transactionid, String paymenttype, String currencytype, String currencyamount, String virtualcoinamount, String iapname, String iapamount, String serverid, String channelid, String idfa, String idfv, String level, String clientV) {
+        this.id = id;
+        this.appid = appid;
+        this.who = who;
+        this.deviceid = deviceid;
+        this.createtime = createtime;
+        this.updatetime = updatetime;
+        this.transactionid = transactionid;
+        this.paymenttype = paymenttype;
+        this.currencytype = currencytype;
+        this.currencyamount = currencyamount;
+        this.virtualcoinamount = virtualcoinamount;
+        this.iapname = iapname;
+        this.iapamount = iapamount;
+        this.serverid = serverid;
+        this.channelid = channelid;
+        this.idfa = idfa;
+        this.idfv = idfv;
+        this.level = level;
+        this.clientV = clientV;
+    }
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
