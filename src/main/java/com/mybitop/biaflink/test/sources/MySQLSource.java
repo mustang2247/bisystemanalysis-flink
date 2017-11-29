@@ -1,4 +1,4 @@
-package com.mybitop.biaflink.test;
+package com.mybitop.biaflink.test.sources;
 
 import com.mybitop.biaflink.conf.ConfigMysql;
 import com.mybitop.biaflink.entity.BiPayment;

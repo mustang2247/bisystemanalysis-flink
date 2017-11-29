@@ -17,7 +17,7 @@
 
 package org.apache.flink.streaming.examples.wordcount;
 
-import com.mybitop.biaflink.test.MySQLSink;
+import com.mybitop.biaflink.test.sinks.MySQLSink;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.streaming.api.datastream.DataStream;
@@ -91,7 +91,7 @@ public class WordCount {
                         .keyBy(0).sum(1);
 
         //sink
-        counts.addSink(new MySQLSink());
+//        counts.addSink(new MySQLSink());
 
         // emit result
         // 发射结果

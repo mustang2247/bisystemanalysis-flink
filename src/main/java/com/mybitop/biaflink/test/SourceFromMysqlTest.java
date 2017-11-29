@@ -1,6 +1,9 @@
 package com.mybitop.biaflink.test;
 
 import com.mybitop.biaflink.entity.BiPayment;
+import com.mybitop.biaflink.test.funs.DataParse;
+import com.mybitop.biaflink.test.sinks.MySQLSink;
+import com.mybitop.biaflink.test.sources.MySQLSource;
 import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
@@ -22,12 +25,15 @@ public class SourceFromMysqlTest {
         env.getConfig().setGlobalJobParameters(params);
 
         //2.从自定义source中读取数据
-        DataStream<BiPayment> students = env.addSource(new MySQLSource());
+        DataStream<BiPayment> students;
+        students = env.addSource(new
+                MySQLSource());
 
         students.flatMap(new DataParse())
-                .keyBy(0)
-                .sum(1)
+                .keyBy(2)
+                .sum(3)
                 .addSink(new MySQLSink());
+
 
         //sink
 
