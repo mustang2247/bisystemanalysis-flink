@@ -47,12 +47,6 @@
             <version>${flink.version}</version>
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>org.apache.flink</groupId>-->
-            <!--<artifactId>flink-streaming-scala_2.11</artifactId>-->
-            <!--<version>${flink.version}</version>-->
-        <!--</dependency>-->
-
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-clients_2.11</artifactId>
@@ -61,13 +55,14 @@
 
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-connector-twitter_2.11</artifactId>
+            <artifactId>flink-connector-kafka-0.10_2.11</artifactId>
             <version>${flink.version}</version>
         </dependency>
 
+        <!--twitter-->
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-connector-kafka-0.10_2.11</artifactId>
+            <artifactId>flink-connector-twitter_2.11</artifactId>
             <version>${flink.version}</version>
         </dependency>
 

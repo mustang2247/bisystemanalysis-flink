@@ -24,8 +24,15 @@ public class SourceFromMysqlTest {
         //2.从自定义source中读取数据
         DataStream<BiPayment> students = env.addSource(new MySQLSource());
 
+        students.flatMap(new DataParse())
+                .keyBy(0)
+                .sum(1)
+                .addSink(new MySQLSink());
+
+        //sink
+
         //3.显示结果
-        students.print();
+//        students.print();
 
         //4.触发流执行
         env.execute();
