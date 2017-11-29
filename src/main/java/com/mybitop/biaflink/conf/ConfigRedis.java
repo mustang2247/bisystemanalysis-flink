@@ -12,7 +12,7 @@ import java.util.Properties;
 /**
  * redis config
  */
-public class RedisConfig {
+public class ConfigRedis {
 
     public int REDIS_PORT;
 

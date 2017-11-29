@@ -17,6 +17,7 @@
 
 package org.apache.flink.streaming.examples.wordcount;
 
+import com.mybitop.biaflink.test.MySQLSink;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.streaming.api.datastream.DataStream;
@@ -89,14 +90,17 @@ public class WordCount {
                         // 按元组字段“0”分组，并汇总元组字段“1”
                         .keyBy(0).sum(1);
 
+        //sink
+        counts.addSink(new MySQLSink());
+
         // emit result
         // 发射结果
-        if (params.has("output")) {
-            counts.writeAsText(params.get("output"));
-        } else {
-            System.out.println("Printing result to stdout. Use --output to specify output path.");
-            counts.print();
-        }
+//        if (params.has("output")) {
+//            counts.writeAsText(params.get("output"));
+//        } else {
+//            System.out.println("Printing result to stdout. Use --output to specify output path.");
+//            counts.print();
+//        }
 
         // execute program
         // 执行程序

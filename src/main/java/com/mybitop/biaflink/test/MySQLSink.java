@@ -1,8 +1,8 @@
-package com.mybitop.biaflink.dau;
+package com.mybitop.biaflink.test;
 
 import com.mybitop.biaflink.conf.ConfigMysql;
 import com.mybitop.biaflink.utils.PropUtil;
-import org.apache.flink.api.java.tuple.Tuple3;
+import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.functions.sink.RichSinkFunction;
 import org.slf4j.Logger;
@@ -17,10 +17,10 @@ import java.sql.PreparedStatement;
  * 或者缓存到Redis中
  * 参考：http://www.jianshu.com/p/b1023b55facb
  */
-public class FunFMDataPersistenceUV extends RichSinkFunction<Tuple3<String, String, String>> {
+public class MySQLSink extends RichSinkFunction<Tuple2<String, Integer>> {
 
     private static final long serialVersionUID = 1L;
-    private static final Logger logger = LoggerFactory.getLogger(FunFMDataPersistenceUV.class);
+    private static final Logger logger = LoggerFactory.getLogger(MySQLSink.class);
 
     private Connection connection;
     //准备执行语句
@@ -49,7 +49,9 @@ public class FunFMDataPersistenceUV extends RichSinkFunction<Tuple3<String, Stri
             Class.forName(configMysql.DRIVER);
             // 获取数据库连接
             connection = DriverManager.getConnection(configMysql.ADDR, configMysql.LOGIN_NAME, configMysql.LOGIN_PASS);
-//            preparedStatement = connection.prepareStatement(sql);//准备执行语句
+
+            String sql = "insert into bi_install ( world, count) values (?,?)";
+            preparedStatement = connection.prepareStatement(sql);//准备执行语句
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -59,22 +61,22 @@ public class FunFMDataPersistenceUV extends RichSinkFunction<Tuple3<String, Stri
     /**
      * invoke()方法解析一个元组数据，并插入到数据库中
      *
-     * @param stringStringStringTuple3
+     * @param data
      * @throws Exception
      */
     @Override
-    public void invoke(Tuple3<String, String, String> stringStringStringTuple3) throws Exception {
-//        try {
-//            String timeseq = data.getField(0);
-//            String thread = data.getField(1);
-//            String message = data.getField(2);
-//            preparedStatement.setString(1,timeseq);
-//            preparedStatement.setString(2,thread);
-//            preparedStatement.setString(3,message);
-//            preparedStatement.executeUpdate();
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
+    public void invoke(Tuple2<String, Integer> data) throws Exception {
+        try {
+            String world = data.getField(0);
+            Integer count = data.getField(1);
+
+            logger.info("MySQLSink  invoke:  world :  " + world + "  count: " + count);
+            preparedStatement.setString(1,world);
+            preparedStatement.setInt(2,count);
+            preparedStatement.executeUpdate();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 

@@ -1,7 +1,7 @@
 package com.mybitop.biaflink.redis;
 
 import com.mybitop.biaflink.conf.ConfigConstent;
-import com.mybitop.biaflink.conf.RedisConfig;
+import com.mybitop.biaflink.conf.ConfigRedis;
 import com.mybitop.biaflink.utils.PropUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +17,7 @@ public class RedisManager {
     private static final Logger logger = LoggerFactory.getLogger(RedisManager.class);
 
     private static JedisPool pool = null;
-    private static RedisConfig redisConfig;
+    private static ConfigRedis redisConfig;
 
     /**
      * 构建redis连接池
@@ -27,7 +27,7 @@ public class RedisManager {
     private static JedisPool getPool() {
         if (redisConfig == null) {
             String envDir = PropUtil.getProp("/env.properties", "envdir");
-            redisConfig = new RedisConfig();
+            redisConfig = new ConfigRedis();
             redisConfig.init("/" + envDir + "redis.properties");
         }
 
