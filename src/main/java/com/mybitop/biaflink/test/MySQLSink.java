@@ -70,7 +70,7 @@ public class MySQLSink extends RichSinkFunction<Tuple2<String, Integer>> {
             String world = data.getField(0);
             Integer count = data.getField(1);
 
-            logger.info("MySQLSink  invoke:  world :  " + world + "  count: " + count);
+//            logger.info("MySQLSink  invoke:  world :  " + world + "  count: " + count);
             preparedStatement.setString(1,world);
             preparedStatement.setInt(2,count);
             preparedStatement.executeUpdate();
