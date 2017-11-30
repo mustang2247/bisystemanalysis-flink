@@ -1,4 +1,4 @@
-package com.mybitop.biaflink.dau;
+package com.mybitop.biaflink.dau.funs;
 
 import com.mybitop.biaflink.entity.Startup;
 import org.apache.flink.api.common.functions.FlatMapFunction;

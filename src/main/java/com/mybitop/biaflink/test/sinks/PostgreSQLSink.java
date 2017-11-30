@@ -1,4 +1,4 @@
-package com.mybitop.biaflink.test.sources;
+package com.mybitop.biaflink.test.sinks;
 
 import org.apache.flink.api.java.tuple.Tuple3;
 import org.apache.flink.configuration.Configuration;

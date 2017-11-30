@@ -1,4 +1,4 @@
-package com.mybitop.biaflink.dau;
+package com.mybitop.biaflink.dau.sinks;
 
 import com.mybitop.biaflink.redis.RedisManager;
 import org.apache.flink.api.java.tuple.Tuple2;

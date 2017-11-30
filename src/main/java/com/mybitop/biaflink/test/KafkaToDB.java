@@ -1,6 +1,6 @@
 package com.mybitop.biaflink.test;
 
-import com.mybitop.biaflink.test.sources.PostgreSQLSink;
+import com.mybitop.biaflink.test.sinks.PostgreSQLSink;
 import org.apache.flink.api.common.functions.FilterFunction;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.restartstrategy.RestartStrategies;

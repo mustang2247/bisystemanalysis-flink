@@ -1,4 +1,4 @@
-package com.mybitop.biaflink.dau;
+package com.mybitop.biaflink.dau.funs;
 
 /**
  * 将PartialUVBolt的数据聚合起来，根据不同的type计算当前周期的数据汇总，

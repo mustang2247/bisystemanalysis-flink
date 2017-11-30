@@ -1,4 +1,4 @@
-package com.mybitop.biaflink.dau;
+package com.mybitop.biaflink.dau.sinks;
 
 import com.mybitop.biaflink.conf.ConfigMysql;
 import com.mybitop.biaflink.utils.PropUtil;

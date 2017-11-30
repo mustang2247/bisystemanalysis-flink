@@ -1,5 +1,8 @@
 package com.mybitop.biaflink.dau;
 
+import com.mybitop.biaflink.dau.funs.FunFMDataParse;
+import com.mybitop.biaflink.dau.funs.FunFMPlatform;
+import com.mybitop.biaflink.dau.sinks.SinkDataPersistenceUV;
 import com.mybitop.biaflink.dau.util.PreLoadData;
 import com.mybitop.biaflink.utils.PropUtil;
 import com.mybitop.biaflink.utils.Utils;
@@ -7,7 +10,6 @@ import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import org.apache.flink.streaming.connectors.redis.common.config.FlinkJedisPoolConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,4 +1,4 @@
-package com.mybitop.biaflink.dau;
+package com.mybitop.biaflink.dau.funs;
 
 /**
  * 统计不同设备的出现次数（UV）3
