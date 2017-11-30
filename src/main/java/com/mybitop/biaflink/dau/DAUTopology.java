@@ -17,6 +17,9 @@ import java.util.Map;
 
 import static com.mybitop.biaflink.conf.ConfigConstent.getFlinkConfs;
 
+/**
+ * 游戏DAU统计
+ */
 public class DAUTopology {
 
     private static final Logger logger = LoggerFactory.getLogger( DAUTopology.class );
