@@ -2,7 +2,6 @@ package com.mybitop.biaflink.dau;
 
 import com.mybitop.biaflink.dau.funs.FunFMDataParse;
 import com.mybitop.biaflink.dau.funs.FunFMPlatform;
-import com.mybitop.biaflink.dau.sinks.SinkDataPersistenceUV;
 import com.mybitop.biaflink.dau.util.PreLoadData;
 import com.mybitop.biaflink.utils.PropUtil;
 import com.mybitop.biaflink.utils.Utils;
@@ -81,17 +80,17 @@ public class DAUTopology {
 //        FlinkJedisPoolConfig conf = new FlinkJedisPoolConfig.Builder().setHost("127.0.0.1").build();
 
 //        counts.addSink(new RedisSink<Tuple2<String, Integer>>(conf, new RedisExampleMapper()));
-        counts.addSink(new SinkDataPersistenceUV());
+//        counts.addSink(new SinkFMDataPersistenceUV());
 
         // emit result
         // 发射结果
         if (params.has("output")) {
             counts.writeAsText(params.get("output"));
-//            counts.writeUsingOutputFormat(new FunFMDataPersistenceUV());
+//            counts.writeUsingOutputFormat(new SinkFMDataPersistenceUV());
         } else {
             System.out.println("Printing result to stdout. Use --output to specify output path.");
             counts.print();
-//            counts.writeUsingOutputFormat(new FunFMDataPersistenceUV());
+//            counts.writeUsingOutputFormat(new SinkFMDataPersistenceUV());
         }
 
         // execute program
